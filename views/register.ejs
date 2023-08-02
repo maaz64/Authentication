@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body{
+            background-color: rgb(133, 181, 166);
+        }
+        #register {
+            height: 55vh;
+            position: fixed;
+            top: 10%;
+            left: 35%;
+            background-color: rgb(190, 223, 212);
+            border-radius: 7px;
+        }
+
+        label{
+            margin-left: 2px;
+        }
+        
+        .form-input,
+        h2,button {
+            margin: 4px;
+            padding: 10px;
+        }
+
+        input {
+            width: 25vw;
+            height: 25px;
+            border: 2px solid  rgb(190, 223, 212);
+            border-radius: 5px;
+        }
+
+        .button {
+           margin-left: 10px; 
+        }
+        button{
+            border: 2px solid  rgb(190, 223, 212);
+            border-radius: 4px;
+        }
+        .notification{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="notification">
+        <% if(flash.success && flash.success.length> 0){%>
+
+            <h5>
+                <%= flash.success %>
+            </h5>
+            <%}%>
+    </div>
+    <div id="register">
+        <h2>Register</h2>
+        <form action="/register" method="POST">
+            <div class="form-input" id="username">
+                <label for="username">Username</label><br>
+                <input type="text" name="username" required>
+            </div>
+            <div class="form-input" id="email">
+                <label for="email">Email</label><br>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-input" id="password">
+                <label for="password">Password</label><br>
+                <input type="password" name="password"crequired>
+            </div>
+            <div class="form-input" id="confirm_password">
+                <label for="confirm_password">Confirm password</label><br>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <div class="button">
+                <button type="submit">Register</button>
+                <small>
+                    <a href="/login">login</a>
+                </small>
+            </div>
+        </form>
+        
+    </div>
+</body>
+
+</html>
