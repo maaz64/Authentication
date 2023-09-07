@@ -4,13 +4,16 @@ const bcrypt = require('bcrypt');
 
 module.exports.Profile = (req,res)=>
 {
-   return res.render('profile');
+   return res.render('profile',{
+    title: 'Auhentication | Profile'
+   });
 }
 module.exports.Home = (req,res)=>
 {
     const isAuth = req.session.isAuth;
     return res.render('home',{
-        isAuth
+        isAuth,
+        title: 'Auhentication | Home'
     });
 }
 
@@ -22,7 +25,9 @@ module.exports.Register = (req,res)=>
     {
         return res.redirect('/');
     }
-    return res.render('register');
+    return res.render('register',{
+        title: 'Auhentication | Register'
+    });
 }
 
 module.exports.Login = (req,res)=>
@@ -31,7 +36,9 @@ module.exports.Login = (req,res)=>
     {
         return res.redirect('/');
     }
-    res.render('login');
+    res.render('login',{
+        title: 'Auhentication | Login'
+    });
 }
 
 module.exports.createUser =async (req,res)=>{
@@ -40,16 +47,15 @@ module.exports.createUser =async (req,res)=>{
 
     if(password != confirm_password)
     {
-        // req.session.error = "";
         req.flash('error',"Password doesn't match");
-        // res.session.error =  "Password doesn't match"
+
         return res.redirect('/register');
     }
 
     const user = await User.findOne({email});
     if(user)
     {
-        // res.session.error = "User already existed";
+        req.flash('error',"User already existed");
         return res.redirect('/login');
     }
 
@@ -59,7 +65,7 @@ module.exports.createUser =async (req,res)=>{
         email,
         password:hashedPassword
     })
-
+    req.flash('success',"Registerd");
     return res.redirect('/login');
 
 }
@@ -71,18 +77,14 @@ module.exports.userLogin = async(req,res)=>{
 
     if(!user)
     {
-        // req.session.error = ;
         req.flash('error',"Invalid User/Password");
-        console.log('User not found');
         return res.redirect('back');
     }  
 
     const isPassMatch = await bcrypt.compare(password,user.password);
     if(!isPassMatch)
     {
-        // req.session.error = "Invalid User/Password";
-        req.flash('error',"Invalid User/Password");
-        console.log('Invalid Password');
+        req.flash('error',"Invalid Email/Password");
         return res.redirect('back');
         
     }

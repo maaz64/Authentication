@@ -1,50 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <style>
-        nav {
-            height: 8dvb;
-            display: flex;
-            background-color: rgb(156, 189, 189);
-            justify-content: space-between;
-        }
-
-        ul {
-            display: flex;
-            list-style: none;
-        }
-
-        li {
-            margin-right: 20px;
-        }
-
-        #title {
-            width: 70%;
-        }
-
-        #title h3 {
-            margin-left: 20px;
-            color: white;
-            font-weight: bolder;
-        }
-
-        a {
-            text-decoration: none;
-        }
-        button{
-            margin-bottom: 4px;
-            padding: 4px;
-            border: 2px solid  rgb(190, 223, 212);
-            border-radius: 4px;
-        }
-        .notification{
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 
 <body>
@@ -86,10 +47,59 @@
             <h5>
                 <%= flash.success %>
             </h5>
-            <%}%>
+        <%}%>
+        <% if(flash.error && flash.error.length> 0){%>
+
+            <h5>
+                <%= flash.error %>
+            </h5>
+        <%}%>
+    </div>
+
+    <div class="container">
+        <div class="text" >
+            <h1>Home Page</h1>
+        </div>
     </div>
 
 
 </body>
 
 </html>
+ -->
+
+<link rel="stylesheet" href="/css/home.css">
+
+<div class="home">
+    <div >
+        <%if(!isAuth){%>
+            <ul>
+                <li>
+                    <button type="button">
+                        <a href="/login">Login</a>
+                    </button>
+                </li>
+                <li><button type="button">
+                        <a href="/register">Register</a>
+                    </button></li>
+            </ul>
+            <%}else{%>
+                <ul>
+                    <li>
+                        <button type="button">
+                            <a href="/profile">profile</a>
+                        </button>
+                    </li>
+                </ul>
+                <%}%>
+
+    </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="text">
+            <h1>Home Page</h1>
+        </div>
+    </div>
+</div>

@@ -1,59 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <style>
-        nav {
-            height: 8vh;
-            display: flex;
-            background-color: rgb(156, 189, 189);
-            justify-content: space-between;
-        }
-
-        ul {
-            display: flex;
-            list-style: none;
-        }
-
-        li {
-            margin-right: 20px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            height: 40vh;
-            width: 40vw;
-            position: fixed;
-            top: 30%;
-            left: 30%;
-            background-color: rgb(190, 223, 212);
-            border-radius: 7px;
-        }
-
-        .text
-        {
-            color: white;
-            position: fixed;
-            top: 43%;
-            left: 39%;
-        }
-
-        button{
-            margin-bottom: 4px;
-            padding: 4px;
-            border: 2px solid  rgb(190, 223, 212);
-            border-radius: 4px;
-        }
-        .notification{
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/profile.css">
 </head>
 
 <body>
@@ -80,7 +32,13 @@
             <h5>
                 <%= flash.success %>
             </h5>
-            <%}%>
+        <%}%>
+        <% if(flash.error && flash.error.length> 0){%>
+
+            <h5>
+                <%= flash.error %>
+            </h5>
+        <%}%>
     </div>
     <div class="container">
         <div class="text">
@@ -90,4 +48,31 @@
 
 </body>
 
-</html>
+</html> -->
+
+<link rel="stylesheet" href="/css/profile.css">
+
+<div class="profile">
+    <div class="buttons">
+        <ul>
+            <li>
+                <a href="/">
+                    <button>
+                        Home
+                    </button>
+                </a>
+            </li>
+            <li>
+                <form action="/logout" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="text">
+            <h1>This is a protected page</h1>
+        </div>
+    </div>
+</div>

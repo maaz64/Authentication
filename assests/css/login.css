@@ -1,0 +1,38 @@
+
+
+#login {
+    height: 40vh;
+    position: fixed;
+    top: 10%;
+    left: 35%;
+    background-color: rgb(190, 223, 212);
+    border-radius: 7px;
+    margin-top: 10vh;
+}
+
+label {
+    margin-left: 2px;
+}
+
+.form-input,
+h2,
+button {
+    margin: 4px;
+    padding: 10px;
+}
+
+input {
+    width: 25vw;
+    height: 30px;
+    border: 2px solid rgb(190, 223, 212);
+    border-radius: 5px;
+}
+
+.button {
+    margin-left: 10px;
+}
+
+button {
+    border: 2px solid rgb(190, 223, 212);
+    border-radius: 4px;
+}

@@ -1,65 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="/css/login.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            background-color: rgb(133, 181, 166);
-        }
-
-        #login {
-            height: 40vh;
-            position: fixed;
-            top: 10%;
-            left: 35%;
-            background-color: rgb(190, 223, 212);
-            border-radius: 7px;
-        }
-
-        label {
-            margin-left: 2px;
-        }
-
-        .form-input,
-        h2,
-        button {
-            margin: 4px;
-            padding: 10px;
-        }
-
-        input {
-            width: 25vw;
-            height: 30px;
-            border: 2px solid rgb(190, 223, 212);
-            border-radius: 5px;
-        }
-
-        .button {
-            margin-left: 10px;
-        }
-
-        button {
-            border: 2px solid rgb(190, 223, 212);
-            border-radius: 4px;
-        }
-        .notification{
-            text-align: center;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="notification">
-        <% if(flash.success && flash.success.length> 0){%>
-
-            <h5>
-                <%= flash.success %>
-            </h5>
-            <%}%>
-    </div>
 
     <div id="login">
         <h2>Login</h2>
@@ -74,6 +14,9 @@
             </div>
             <div class="button">
                 <button type="submit">Login</button>
+                <a href="/auth/google">
+                    <button >Google</button>
+                </a>
                 <small>
                     <a href="/register">Register</a>
                 </small>
@@ -81,6 +24,3 @@
         </form>
 
     </div>
-</body>
-
-</html>
