@@ -1,54 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="/css/profile.css">
-</head>
-
-<body>
-
-    <nav>
-        <ul>
-            <li>
-                <a href="/">
-                    <button>
-                        Home
-                    </button>
-                </a>
-            </li>
-            <li>
-                <form action="/logout" method="POST">
-                    <button type="submit">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </nav>
-    <div class="notification">
-        <% if(flash.success && flash.success.length> 0){%>
-
-            <h5>
-                <%= flash.success %>
-            </h5>
-        <%}%>
-        <% if(flash.error && flash.error.length> 0){%>
-
-            <h5>
-                <%= flash.error %>
-            </h5>
-        <%}%>
-    </div>
-    <div class="container">
-        <div class="text">
-            <h1>This is a protected page</h1>
-        </div>
-    </div>
-
-</body>
-
-</html> -->
 
 <link rel="stylesheet" href="/css/profile.css">
 
@@ -67,12 +16,20 @@
                     <button type="submit">Logout</button>
                 </form>
             </li>
+            <li>
+                <a href="/reset-password">
+                    <button>
+                        Reset Password
+                    </button>
+                </a>
+            </li>
         </ul>
     </div>
 
     <div class="container">
         <div class="text">
             <h1>This is a protected page</h1>
+            
         </div>
     </div>
 </div>

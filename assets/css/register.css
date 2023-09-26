@@ -1,29 +1,31 @@
-/* body{
-    background-color: rgb(133, 181, 166);
-} */
+
 #register {
-    height: 55vh;
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    position: relative;
     top: 10%;
     left: 35%;
     background-color: rgb(190, 223, 212);
     border-radius: 7px;
-    margin-top:5vh
+    margin-top:5vh;
+    width:30vw;
 }
 
 label{
     margin-left: 2px;
 }
 
-.form-input,
-h2,button {
+.form-input,button {
     margin: 4px;
     padding: 10px;
 }
 
 input {
     width: 25vw;
-    height: 25px;
+    height: 30px;
     border: 2px solid  rgb(190, 223, 212);
     border-radius: 5px;
 }
@@ -34,7 +36,10 @@ input {
 button{
     border: 2px solid  rgb(190, 223, 212);
     border-radius: 4px;
+    cursor: pointer;
 }
-.notification{
-    text-align: center;
+
+hr{
+    color: black;
+    width:100%;
 }

@@ -2,25 +2,34 @@
 
 
     <div id="login">
-        <h2>Login</h2>
+        <div class="heading">
+            <h2>Login</h2>
+        </div>
+        <hr/>
         <form action="/login" method="POST">
             <div class="form-input" id="email">
                 <label for="email">Email</label><br>
                 <input type="email" name="email" required>
             </div>
+
             <div class="form-input" id="password">
                 <label for="password">Password</label><br>
                 <input type="password" name="password" required>
             </div>
+        
             <div class="button">
                 <button type="submit">Login</button>
-                <a href="/auth/google">
-                    <button >Google</button>
-                </a>
+               
                 <small>
-                    <a href="/register">Register</a>
+                    <a href="/register">Go To Sign Up</a>
                 </small>
             </div>
         </form>
+        <hr/>
+        <div class="google">
+            <a href="/auth/google">
+                <button>Login with Google</button>
+            </a>
+        </div>
 
     </div>

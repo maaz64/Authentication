@@ -1,16 +1,23 @@
 const session = require("express-session");
 const User = require('../Models/user');
+const passport = require('passport');
+const passportLocal = require('../Config/passport-local-strategy');
 const bcrypt = require('bcrypt');
 
 module.exports.Profile = (req,res)=>
 {
-   return res.render('profile',{
-    title: 'Auhentication | Profile'
-   });
+    if(req.isAuthenticated()){
+
+        return res.render('profile',{
+         title: 'Auhentication | Profile'
+        });
+    }
+    return res.redirect('/login');
 }
 module.exports.Home = (req,res)=>
 {
-    const isAuth = req.session.isAuth;
+    // const isAuth = req.session.isAuth;
+    const isAuth = req.isAuthenticated();
     return res.render('home',{
         isAuth,
         title: 'Auhentication | Home'
@@ -21,20 +28,20 @@ module.exports.Home = (req,res)=>
 
 module.exports.Register = (req,res)=>
 {
-    if(req.session.isAuth)
+    if(req.isAuthenticated())
     {
-        return res.redirect('/');
+        return res.redirect('/profile');
     }
     return res.render('register',{
-        title: 'Auhentication | Register'
+        title: 'Auhentication | Sign Up'
     });
 }
 
 module.exports.Login = (req,res)=>
 {
-    if(req.session.isAuth)
+    if(req.isAuthenticated())
     {
-        return res.redirect('/');
+        return res.redirect('/profile');
     }
     res.render('login',{
         title: 'Auhentication | Login'
@@ -71,36 +78,61 @@ module.exports.createUser =async (req,res)=>{
 }
 
 module.exports.userLogin = async(req,res)=>{
-
-    const{email,password}=req.body;
-    const user = await User.findOne({email});
-
-    if(!user)
-    {
-        req.flash('error',"Invalid User/Password");
-        return res.redirect('back');
-    }  
-
-    const isPassMatch = await bcrypt.compare(password,user.password);
-    if(!isPassMatch)
-    {
-        req.flash('error',"Invalid Email/Password");
-        return res.redirect('back');
-        
-    }
-    req.session.isAuth = true;
     req.flash('success','Signed in successfully');
     return res.redirect('/profile');
 
 }
 
-module.exports.userLogout = (req,res)=>{
-    req.flash('success',"You have logged out");
-    req.session.destroy((err)=>{
+module.exports.userLogout = (req,res,next)=>{
+    req.logout((err)=>{
         if(err)
         {
-            throw err;
+            return next(err)
         }
+        req.flash('success','You have logged out');
         return res.redirect('/');
-    })
+    });
+}
+
+
+module.exports.resetPasswordPage = (req,res)=>
+{
+    if(req.isAuthenticated()){
+
+        return res.render('reset_password',{
+         title: 'Auhentication | Reset Password'
+        });
+    }
+    return res.redirect('/login');
+}
+
+module.exports.changePassword= async(req,res)=>{
+    
+    const{email,password,confirm_password}=req.body;
+
+    if(password != confirm_password)
+    {
+        req.flash('error',"Password doesn't match");
+
+        return res.redirect('/reset-password');
+    }
+    // const user = await User.findOne({email});
+    const hashedPassword = await bcrypt.hash(password,12);
+    // const updatedUser = await User.findByIdAndUpdate(user._id,{
+    //     username:user.username,
+    //     email,
+    //     password:hashedPassword
+    // })
+
+    const updatedUser = await User.findOneAndUpdate({email},{password:hashedPassword});
+
+    if(!updatedUser)
+    {
+        req.flash('error',"Something went wrong");
+        return res.redirect('/reset-password');
+    }
+
+    req.flash('success',"Password updated successfully");
+    return res.redirect('/profile');
+
 }

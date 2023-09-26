@@ -1,18 +1,25 @@
+const dotenv = require('dotenv');
+dotenv.config({path: './.env'});
 const express = require('express');
+const env = require('./Config/environment');
+const logger = require('morgan');
 const app = express();
 const session = require("express-session");
 const flash = require('connect-flash');
 const flashMiddleware = require('./Config/flash_middleware');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const PassportGoogle = require('./Config/passport-google-oauth2-strategy');
+const passortLocal = require('./Config/passport-local-strategy');
 const db = require('./Config/mongoose');
 const expressEjsLayouts = require('express-ejs-layouts');
-require('dotenv').config();
-const MongoUrl = process.env.MongoUrl;
+const passport = require('./Config/passport-local-strategy');
+const MongoUrl = env.mongo_url;
 
-const Port = 3000;
+const Port = process.env.Port || 3000;
 
-app.use(express.static('./assests'));
+app.use(express.static(env.assets_path));
+
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 app.use(expressEjsLayouts);
 app.set('layout extractStyles', true);
@@ -28,11 +35,11 @@ const store = new MongoDBStore({
 
 app.use(session({
   name:'Authentication',
-  secret: 'somethingsomething',
+  secret: env.session_cookie_secret,
   resave: false,
   saveUninitialized: false,
   cookie:{
-    maxAge:(1000*60*60*24)
+    maxAge:(1000*60*60)
   },
   store:store,
 }))
@@ -40,8 +47,11 @@ app.use(session({
 app.use(flash());
 app.use(flashMiddleware.setFlash);
 
-app.use('/',require('./routes/index.js'));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.setAuthenticatedUser)
 
+app.use('/',require('./routes/index.js'));
 
 app.set('view engine','ejs');
 app.set('views','./views');

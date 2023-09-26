@@ -1,12 +1,9 @@
-body{
-    margin: 0;
-    padding: 0;
-}
-/* nav {
-    height: 8dvb;
+.buttons {
+    height: 8vh;
     display: flex;
-    background-color: rgb(156, 189, 189);
+    /* background-color: rgb(156, 189, 189); */
     justify-content: space-between;
+    
 }
 
 ul {
@@ -18,26 +15,9 @@ li {
     margin-right: 20px;
 }
 
-#title {
-    width: 70%;
-}
-
-#title h3 {
-    margin-left: 20px;
-    color: white;
-    font-weight: bolder;
-} */
-
 a {
     text-decoration: none;
 }
-button{
-    margin-bottom: 4px;
-    padding: 4px;
-    border: 2px solid  rgb(190, 223, 212);
-    border-radius: 4px;
-}
-
 
 .container {
     height: 40vh;
@@ -54,6 +34,13 @@ button{
     color: white;
     position: fixed;
     top: 43%;
-    left: 45%;
-    text-align: center;
+    left: 39%;
+}
+
+button{
+    margin-bottom: 4px;
+    padding: 4px;
+    border: 2px solid  rgb(190, 223, 212);
+    border-radius: 4px;
+    cursor: pointer;
 }
