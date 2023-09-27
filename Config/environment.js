@@ -1,18 +1,22 @@
+// importing required modules 
 const fs = require('fs');
 const rfs = require('rotating-file-stream');
 const path = require('path');
 
+
+// creating directory to store the production logs
 const logDirectory = path.join(__dirname,'../production_logs');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
-const accessLogStream = rfs.createStream("access .log", {
-    // size: "10M", // rotate every 10 MegaBytes written
-    interval: "1d", // rotate daily
+// creating log stream for 1 day interval 
+const accessLogStream = rfs.createStream("access.log", {
+    interval: "1d", 
     path:logDirectory,
-    // compress: "gzip" // compress rotated files
+
   })
 
 
+//   creating development environments
 const development = {
     name:'development',
     assets_path : process.env.ASSETS_PATH,
@@ -27,6 +31,7 @@ const development = {
     }
 }
 
+// creating production environment
 const production = {
     name:'production',
     assets_path : process.env.ASSETS_PATH,
@@ -41,4 +46,5 @@ const production = {
     }
 }
 
+// setting the environment according to the NODE_ENV value
 module.exports = eval((process.env.NODE_ENV) == undefined ? development : eval(process.env.NODE_ENV));

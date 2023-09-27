@@ -1,4 +1,6 @@
+// middleware to check if the user is authorised or not
 const session = require('express-session');
+
 
 module.exports =  (req,res,next)=>
 {
